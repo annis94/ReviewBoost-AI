@@ -1,42 +1,50 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// Forcer l'utilisation du runtime Node.js
+// Configuration minimale pour le middleware
 export const config = {
-  runtime: 'nodejs',
-  matcher: '/:path*', // Match absolument tout temporairement
+  matcher: [
+    // Match toutes les routes sauf les assets statiques
+    '/((?!_next/static|_next/image|favicon.ico).*)',
+  ],
 };
 
 export function middleware(request: NextRequest) {
   // Logs détaillés de la requête
-  console.log('=== MIDDLEWARE DEBUG INFO ===');
+  console.log('\n=== MIDDLEWARE DEBUG INFO ===');
   console.log(`Request URL: ${request.url}`);
-  console.log(`Request Method: ${request.method}`);
-  console.log(`Request Headers:`, Object.fromEntries(request.headers.entries()));
-  console.log(`Search Params:`, Object.fromEntries(request.nextUrl.searchParams.entries()));
   
-  // Log des cookies de manière compatible
-  const cookies: Record<string, string> = {};
-  request.cookies.getAll().forEach(cookie => {
-    cookies[cookie.name] = cookie.value;
-  });
-  console.log(`Cookies:`, cookies);
+  // Log de tous les paramètres de l'URL
+  const allParams = Object.fromEntries(request.nextUrl.searchParams.entries());
+  console.log('All URL Parameters:', allParams);
   
-  console.log('===========================');
-
-  // Vérifier spécifiquement le paramètre shop
+  // Vérification explicite du paramètre shop
   const shopParam = request.nextUrl.searchParams.get('shop');
-  console.log(`Shop Query Param = ${shopParam}`);
-
-  // Si pas de shop, vérifier les autres sources possibles
+  console.log('Shop Parameter (direct):', shopParam);
+  
+  // Vérification alternative
+  const shopParamAlt = allParams['shop'];
+  console.log('Shop Parameter (from allParams):', shopParamAlt);
+  
+  // Vérification de l'URL brute
+  console.log('Raw URL:', request.nextUrl.toString());
+  console.log('Search String:', request.nextUrl.search);
+  
+  // Pour le test, on retourne une erreur si pas de shop
   if (!shopParam) {
-    const shopFromHeader = request.headers.get('x-shopify-shop-domain');
-    const shopFromCookie = request.cookies.get('shopify_shop')?.value;
-    console.log('Shop from other sources:', {
-      header: shopFromHeader,
-      cookie: shopFromCookie
+    console.log('❌ No shop parameter found in URL');
+    console.log('Full request details:', {
+      url: request.url,
+      searchParams: allParams,
+      rawSearch: request.nextUrl.search
     });
+    return NextResponse.json(
+      { error: 'No shop provided' },
+      { status: 400 }
+    );
   }
 
-  // Pour l'instant, on laisse passer toutes les requêtes
+  console.log('✅ Shop parameter found:', shopParam);
+  console.log('===========================\n');
+  
   return NextResponse.next();
 } 
