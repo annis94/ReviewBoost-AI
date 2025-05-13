@@ -2,13 +2,6 @@
 
 CV-AI est une application web Next.js qui exploite la puissance d'OpenAI (GPT-3.5 Turbo) pour aider les utilisateurs à générer des CV professionnels et personnalisés. Les utilisateurs peuvent fournir des informations sur leur profil, des instructions spécifiques et une description de poste pour obtenir un CV structuré au format JSON, qui est ensuite rendu en PDF.
 
-**(Optionnel mais recommandé) :**
-> **Lien vers la démo live :** `[URL_DE_VOTRE_DEMO_LIVE_ICI]`
->
-> **Screenshots :**
-> ![Screenshot Interface CV-AI](chemin/vers/votre/screenshot_interface.png)
-> ![Screenshot PDF Généré](chemin/vers/votre/screenshot_pdf.png)
-
 ## Table des Matières
 
 1.  [Fonctionnalités Principales](#fonctionnalités-principales)
