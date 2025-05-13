@@ -149,29 +149,3 @@ Prompt Engineering Avancé: Un meta-prompt très détaillé est construit dynami
 
 Validation et Nettoyage Rigoureux (cleanAndValidateJSON): Même avec des prompts stricts, les LLMs peuvent parfois produire des sorties imparfaites. Cette fonction garantit que le JSON reçu d'OpenAI est parsé correctement, que les champs attendus sont présents (avec des valeurs par défaut si manquants), et que les types de données sont respectés, assurant ainsi la robustesse avant le rendu PDF.
 
-Points d'Intérêt et Évolutions Possibles
-
-Qualité de Génération: La qualité du CV généré dépend fortement de la clarté du prompt utilisateur et des capacités du modèle LLM (actuellement GPT-3.5 Turbo).
-
-Gestion des Tokens: Le max_tokens: 2000 est une limite à surveiller pour des profils très longs.
-
-Modèles de CV Multiples: Actuellement, un seul style de PDF est généré. L'ajout de plusieurs templates PDF sélectionnables par l'utilisateur serait une amélioration majeure.
-
-Interface d'Édition: Permettre à l'utilisateur d'éditer le CV généré avant le téléchargement.
-
-Sauvegarde des CVs: Implémenter une base de données pour sauvegarder les CVs générés (nécessiterait une authentification utilisateur).
-
-Support Multilingue: Pour l'interface et la génération de CV.
-
-Tests Unitaires et d'Intégration: Pour assurer la fiabilité des routes API et des composants.
-
-Passage à des Modèles Plus Récents: Évaluer l'utilisation de GPT-4 ou d'autres modèles pour une meilleure qualité de génération.
-
-
-
-J'espère que cette version est exactement ce que vous recherchiez ! Elle se concentre sur la présentation des fonctionnalités et de la technicité du projet de manière positive.
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-IGNORE_WHEN_COPYING_END
